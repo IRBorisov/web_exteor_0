@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  web:
+    build: ./web_ext
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./web_ext/:/usr/src/web_ext/
+#    ports:
+#      - 8000:8000
+    expose:
+      - 8000
+    env_file:
+      - ./.env.dev
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 1337:80
+    depends_on:
+      - web

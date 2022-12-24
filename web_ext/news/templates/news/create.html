@@ -1,0 +1,55 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block title %}Форма по добавлению записи{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h2>Форма по добавлению записи</h2>
+        <form id="CreateForm", method="post">
+            {% csrf_token %}
+
+            {{ form.schema }}<br>
+            {{ form.name }} {{ form.type }}<br><br>
+            <button onClick="insertThisInThere('ℬ','inputSign');" type="button">ℬ</button>
+            <button onClick="insertThisInThere('×','inputSign');" type="button">×</button>
+            <button onClick="insertThisInThere('∀','inputSign');" type="button">∀</button>
+            <button onClick="insertThisInThere('∃','inputSign');" type="button">∃</button>
+            <button onClick="insertThisInThere('¬','inputSign');" type="button">¬</button>
+            <button onClick="insertThisInThere('∨','inputSign');" type="button">∨</button>
+            <button onClick="insertThisInThere('&','inputSign');" type="button">&</button>
+            <button onClick="insertThisInThere('⇒','inputSign');" type="button">⇒</button>
+            <button onClick="insertThisInThere('⇔','inputSign');" type="button">⇔</button>
+            <button onClick="insertThisInThere('∅','inputSign');" type="button">∅</button>
+            <button onClick="insertThisInThere('≠','inputSign');" type="button">≠</button>
+            <button onClick="insertThisInThere('∈','inputSign');" type="button">∈</button>
+            <button onClick="insertThisInThere('∉','inputSign');" type="button">∉</button>
+            <button onClick="insertThisInThere('⊂','inputSign');" type="button">⊂</button>
+            <button onClick="insertThisInThere('⊄','inputSign');" type="button">⊄</button>
+            <button onClick="insertThisInThere('⊆','inputSign');" type="button">⊆</button>
+            <button onClick="insertThisInThere('∩','inputSign');" type="button">∩</button>
+            <button onClick="insertThisInThere('∪','inputSign');" type="button">∪</button>
+            <button onClick="insertThisInThere('∆','inputSign');" type="button">∆</button>
+            <br><br>
+            {{ form.rs_definition }}<br>
+            {{ form.term }}<br>
+            {{ form.text_definition }}<br>
+            <span>{{ error }}</span>
+            <br>
+            <div id = "error1"></div>
+
+            <button class="btn btn-success" type="submit">Добавить запись</button>
+            
+        </form>
+    <br />
+
+    </div>
+<script src="{% static 'main/js/main.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+    <!-- <input type="text"  value="inputOne" /><br />
+    <input type="submit" onClick="insertThisInThere('⊆','inputSign')" value="insert *A* into inputOne" />
+
+    <br/><hr /><br/>
+
+    <textarea >inputTwo</textarea><br />
+    <button onClick="insertThisInThere('ℬ','inputOne');">insert *B* into inputTwo</button> --!>

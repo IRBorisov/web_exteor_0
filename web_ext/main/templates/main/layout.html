@@ -1,0 +1,38 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
+    <link rel="shortcut icon" href="{%  static 'main/img/favicon.ico' %}">
+</head>
+<body>
+    <div class = even_h>
+        <aside>
+        <img src="{% static 'main/img/ext_logo.png' %}" alt="Logo">
+        <span class="logo">exteor</span>
+        <h3>Навигация</h3>
+        <ul>
+            <a href="{% url 'home' %}"><li><i class="fas fa-home"></i> Главная</li></a>
+            <a href="{% url 'about' %}"><li><i class="fas fa-address-card"></i> О проекте</li></a>
+            <a href="{% url 'news_home' %}"><li><i class="fas fa-list"></i> Записи</li></a>
+            <a href=""><li><i class="fas fa-paper-plane"></i> Контакты</li></a>
+            <a href="{% url 'create' %}"><li><button class="btn btn-info"><i class="fas fa-plus-circle"></i> Добавить запись</button></li></a>
+        </ul>
+        </aside>
+
+        <main>
+        {% block content %}
+        {% endblock %}
+        </main>
+    </div>
+
+
+</body>
+</html>

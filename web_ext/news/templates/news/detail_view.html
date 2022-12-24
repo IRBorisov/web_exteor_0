@@ -1,0 +1,16 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} {{ article.title }} {% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>{{ article.schema }}</h1>
+        <p>{{ article.name }}</p>
+        <p>{{ article.type }}</p>
+        <p>{{ article.rs_definition }}</p>
+        <p>{{ article.term }}</p>
+        <p>{{ article.text_definition }}</p>
+        <a href="{% url 'news-delete' article.id %}" class = 'btn btn-danger'>Удалить</a>
+        <a href="{% url 'news-update' article.id %}" class = 'btn btn-info'>Редактировать</a>
+    </div>
+{% endblock %}
