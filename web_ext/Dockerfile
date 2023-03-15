@@ -1,25 +1,28 @@
 # base image  
-FROM python:3.9.6-alpine   
+ARG UBUNTU_VER="jammy"
+FROM ubuntu:$UBUNTU_VER as cpp-builder
+ARG UBUNTU_VER 
+ARG DEBIAN_FRONTEND=noninteractive
 
-#ENV DockerHOME=/home/app/webapp  
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends \
+        python3 \
+        python3-pip
 
-# set work directory  
-#RUN mkdir -p $DockerHOME  
-
-# where your code lives  
-WORKDIR /usr/src/app 
-
+# Do not save bytecodes for python modules because we only run 1 process
 ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# Enable python log streaming
+ENV PYTHONUNBUFFERED 1 
 
-# copy whole project to your docker home directory. 
-#COPY . $DockerHOME  
-# run this command to install all dependencies  
-
-RUN pip install --upgrade pip
 COPY ./requirements.txt .
-RUN pip install -r requirements.txt
+COPY import /home/import
+RUN python3 -m pip install --upgrade pip && \
+    python3 -m pip install -r requirements.txt && \
+    python3 -m pip install $(find /home/import -name '*.whl')
+
 # port where the Django app runs  
 COPY . .
+RUN python3 manage.py test
+
 # start server  
 #CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
